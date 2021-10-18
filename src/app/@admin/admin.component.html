@@ -1,0 +1,25 @@
+<div class="main-wrapper">
+  <router-outlet class="router-outlet-wrapper"></router-outlet>
+  <div class="navbar">
+    <button mat-button class="material-icons navbar-item-icon" (click)="onNavigateBack()" matTooltip="Go back">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <div class="navbar-center-controls">
+      <button mat-button [matMenuTriggerFor]="productsMenu" class="navbar-item">Manage Products</button>
+    </div>
+
+    <mat-menu #productsMenu="matMenu">
+      <button mat-menu-item (click)="onNavigateToProductCategories()">View Product Categories</button>
+      <button mat-menu-item (click)="onNavigateToAllProducts()">View All Products</button>
+    </mat-menu>
+
+
+    <button mat-button class="material-icons navbar-item-icon" [matMenuTriggerFor]="menu">
+      <span>Hi, {{displayName}}</span>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onSignOut()">Sign out</button>
+    </mat-menu>
+  </div>
+</div>

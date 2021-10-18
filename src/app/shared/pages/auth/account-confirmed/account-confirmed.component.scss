@@ -1,0 +1,99 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  height: 100%;
+  background-color: #2196f3;
+}
+
+.loader-container {
+  width: 448px;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.loadbar {
+  height: 4px;
+  padding-top: 0;
+  margin-top: 0;
+  width: 100%;
+}
+.card-container {
+  border: 0.0625rem solid whitesmoke;
+  border-radius: 0.5rem;
+  width: 448px;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+mat-card-title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+mat-card-subtitle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  color: red;
+  font-weight: 500;
+}
+
+.image-container {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.header-image {
+  width: 100px;
+  background-size: cover;
+}
+.form-field-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field {
+  flex: 1;
+}
+.forgot-password-text {
+  color: #1a73e8;
+  font-weight: 550;
+  margin-top: 0px;
+  flex: 1;
+  cursor: pointer;
+}
+.form-field > mat-label {
+  width: 336px;
+  height: 22px;
+  padding: 12px 14px 12px 14px;
+  margin: 2px 2px 0 2px;
+  min-width: 0px;
+  min-height: auto;
+}
+
+.bottom-controls-container {
+  display: flex;
+  justify-content: space-around;
+  width: 448px;
+  margin: 20px 0 0 0;
+}
+
+.signIn-button {
+  background: #1a73e8;
+  color: #ffffff;
+  width: 100px;
+  height: 36px;
+  margin-left: auto;
+  flex: 1;
+}
+
+.signUp-button {
+  color: #1a73e8;
+  background: #ffffff;
+
+  height: 36px;
+  margin-left: 0;
+}

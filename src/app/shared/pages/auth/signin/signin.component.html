@@ -1,0 +1,61 @@
+<div class="loader-container">
+  <mat-progress-bar *ngIf="showLoadingEndicator" mode="indeterminate"></mat-progress-bar>
+</div>
+<mat-card class="card-container screen-control-wrapper">
+  <div class="image-container">
+
+    <img src="assets/images/Logo-1-Transparent.png" class="header-image">
+  </div>
+  <div>
+    <mat-card-title>Sign In</mat-card-title>
+    <mat-card-subtitle *ngIf="errorMessage">{{errorMessage}}</mat-card-subtitle>
+  </div>
+
+
+  <mat-card-content>
+    <form [formGroup]="loginForm" (ngSubmit)="signIn()">
+      <div class="form-field-container">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Email Address</mat-label>
+          <input type="text" matInput formControlName="UserName">
+          <mat-error *ngIf="UserName.touched && UserName.invalid">
+            <div *ngIf="UserName.errors.required">please provide your email address.</div>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-field-container">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput formControlName="Password">
+          <mat-error *ngIf="Password.touched && Password.invalid">
+            <div *ngIf="Password.errors.required">please provide password.</div>
+          </mat-error>
+        </mat-form-field>
+
+        <p class="forgot-password-text" (click)="forgotPassword()">Forgot Password?</p>
+      </div>
+
+
+
+      <div class="bottom-controls-container">
+        <button class="signUp-button" type="button" mat-button (click)="createAccount()">Create account</button>
+        <button class="signIn-button" type="submit" mat-button
+          disabled="{{submitButtonDiabled}}">{{submitButtonText}}</button>
+      </div>
+
+
+    </form>
+  </mat-card-content>
+</mat-card>
+<div class="center-notice-text">
+  <h3 class="small-screen-device">
+    Use a device with a larger screen such a laptop or desktop to
+    get signin.
+  </h3>
+</div>
+
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

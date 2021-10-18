@@ -1,0 +1,5 @@
+@import "/src/app/@theme/generic/colors.scss";
+
+.increase-size-on-hover-animation:hover {
+  transform: scale(1.1) perspective(1px);
+}

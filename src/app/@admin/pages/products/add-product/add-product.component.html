@@ -1,0 +1,142 @@
+<div class="container">
+  <mat-toolbar class="toolbar">
+    <span class="fill-remaining-space"></span>
+    <div class="dialog-header">
+      <div class="dialog-header-title">Add {{categoryName}} Product </div>
+      <div class="dialog-header-error-message" *ngIf="errorMessage">{{errorMessage}}</div>
+    </div>
+    <span class="fill-remaining-space"></span>
+  </mat-toolbar>
+
+  <mat-horizontal-stepper linear #stepper class="stepper-container">
+    <mat-step [stepControl]="productForm" [editable]="true">
+      <form [formGroup]="productForm" class="form">
+        <ng-template matStepLabel>Product Details</ng-template>
+
+        <div class="field-container-inline">
+          <mat-form-field class="field-inline">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="Name" type="text" required>
+            <mat-error *ngIf="Name.touched && Name.invalid">
+              <div *ngIf="Name.errors.required">Name is required.</div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="field-container-inline">
+          <mat-form-field class="field-inline">
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="Description" type="text" required>
+            <mat-error *ngIf="Description.touched && Description.invalid">
+              <div *ngIf="Description.errors.required">Description is required.</div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="field-container-inline">
+          <mat-form-field class="field-inline">
+            <mat-label>Quantity</mat-label>
+            <input matInput formControlName="Quantity" type="number" required>
+            <mat-error *ngIf="Quantity.touched && Quantity.invalid">
+              <div *ngIf="Quantity.errors.required">Quantity is required.</div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="field-container">
+          <div class="uploadfilecontainer" *ngIf="backgroundImg.length > 0" [style.background-image]="backgroundImg" (click)="fileInput.click()" DragDropFile (onFileDropped)="addFile($event)">
+            <input hidden type="file" accept="image/x-png,image/gif,image/jpeg, image/jpg"  #fileInput (change)="addFile($event)">
+          </div>
+          <mat-progress-bar class="image-upload-progress-bar" *ngIf="showProgress" mode="determinate" [value]="progress"></mat-progress-bar>
+          <span class="error-message" *ngIf="incorrectTypeErrorMessage != null">{{incorrectTypeErrorMessage}}</span>
+        </div>
+
+        <div class="button-row">
+          <button mat-raised-button matStepperNext color="primary">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [editable]="true">
+      <form class="form">
+        <ng-template matStepLabel>Flavours</ng-template>
+        <div class="form-field-inline">
+          <mat-form-field>
+            <mat-label>Product Flavours</mat-label>
+            <input matInput type="text" placeholder="Salt & Vinegar" #flavour>
+          </mat-form-field>
+
+          <button mat-raised-button color="accent" (click)="onAddFlavour(flavour.value)">
+            Add
+          </button>
+        </div>
+
+        <div *ngIf="flavours.length > 0" class="field-container-inline list-questions">
+          <mat-list role="list">
+            <mat-list-item *ngFor="let flavour of flavours" (click)="onRemoveFlavour(flavour)">
+              {{flavour.Name}}
+            </mat-list-item>
+          </mat-list>
+        </div>
+
+        <div class="control-buttons-container">
+          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button color="primary" matStepperNext class="procced-button"
+            [disabled]="flavours.length ==0">
+            Add Flavours(s)
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [editable]="true">
+      <form class="form">
+        <ng-template matStepLabel>Sizes, Quantity ,and Price</ng-template>
+        <div class="form-field-inline">
+          <mat-form-field>
+            <mat-label>Sizes</mat-label>
+            <input matInput type="text" placeholder="1 L" #size>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Price</mat-label>
+            <input matInput type="text" placeholder="10.50" #price>
+          </mat-form-field>
+
+          <button mat-raised-button color="accent" (click)="onAddSize(size.value,price.value)">
+            Add
+          </button>
+        </div>
+
+        <div *ngIf="sizes.length > 0" class="field-container-inline list-questions">
+          <mat-list role="list">
+            <mat-list-item *ngFor="let item of sizes">
+              <tr>
+                <td>{{item.Size}}</td>
+                <td>{{item.Price}}</td>
+                <td>{{item.Quantity}}</td>
+              </tr>
+            </mat-list-item>
+          </mat-list>
+        </div>
+
+        <div class="control-buttons-container">
+          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button color="primary"
+          matStepperNext class="procced-button"
+           [disabled]="sizes.length ==0"
+            (click)="onSubmit()">
+           Submit
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+
+
+</div>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

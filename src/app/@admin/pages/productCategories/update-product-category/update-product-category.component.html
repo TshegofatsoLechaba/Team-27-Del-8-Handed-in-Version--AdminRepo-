@@ -1,0 +1,41 @@
+<div class="container">
+  <mat-toolbar class="toolbar">
+    <span class="fill-remaining-space"></span>
+    <div class="dialog-header">
+      <div class="dialog-header-title">Update {{updateName}}</div>
+      <div class="dialog-header-error-message" *ngIf="errorMessage">{{errorMessage}}</div>
+    </div>
+    <span class="fill-remaining-space"></span>
+  </mat-toolbar>
+
+  <form [formGroup]="form" class="form" (ngSubmit)="onSubmit()" *ngIf="form != null">
+    <div class="field-container-inline">
+      <mat-form-field class="field-inline">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="Name" type="text" required>
+        <mat-error *ngIf="Name.touched && Name.invalid">
+          <div *ngIf="Name.errors.required">Name is required.</div>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="field-container-inline">
+      <mat-form-field class="field-inline">
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="Description" type="text" required>
+        <mat-error *ngIf="Description.touched && Description.invalid">
+          <div *ngIf="Description.errors.required">Description is required.</div>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="button-row">
+      <button mat-button mat-dialog-close>Cancel </button>
+      <button mat-raised-button type="submit" class="button-submit">Submit</button>
+    </div>
+  </form>
+</div>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

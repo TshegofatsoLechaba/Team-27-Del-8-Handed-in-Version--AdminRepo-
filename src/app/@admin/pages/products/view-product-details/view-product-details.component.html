@@ -1,0 +1,157 @@
+<div class="wrapper" *ngIf="product!= null">
+
+  <div class="details-container">
+
+    <div class="product-details mat-elevation-z8 ">
+
+
+      <div class="detail-row">
+        <div class="label">Category:</div>
+        <div class="value">{{product.categoryName}}</div>
+      </div>
+      <div class="detail-row">
+        <div class="label">Name:</div>
+        <div class="value">{{product.name}}</div>
+      </div>
+
+      <div class="detail-row">
+        <div class="label">Description:</div>
+        <div class="value">{{product.description}}</div>
+      </div>
+
+      <div class="detail-row">
+        <div class="label">Quantity on Hand:</div>
+        <div class="value">{{product.quantityOnHand}}</div>
+      </div>
+      <div class="bottom-controls-container">
+        <button mat-raised-button (click)="onUpdateProduct(product)">Update </button>
+      </div>
+    </div>
+    <div class="product-image-container  mat-elevation-z8">
+      <img [src]="photoUrl" alt="" class="image">
+    </div>
+  </div>
+
+  <div class="tables-container">
+    <!-- Flavours -->
+    <div class="mat-elevation-z8 table-container">
+
+      <div class="table-top-controllers">
+        <div class="table-name"> {{product.name}} Flavours</div>
+        <div>
+          <button mat-button class="top-table-menu" (click)="onAddProductFlavour()">Add New {{product.name}}
+            Flavour</button>
+        </div>
+      </div>
+
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="flavourApplyFilter($event)" placeholder="Ex. ium">
+      </mat-form-field>
+
+      <mat-table [dataSource]="flavourDataSource" matSort class="table" #mytable>
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="list menu" matTooltip="Show actions">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="onUpdateProductFlavour(element)">
+                <mat-icon>create</mat-icon>
+                <span matTooltip="update">Update</span>
+              </button>
+
+              <button mat-menu-item (click)="onDeleteProductFlavour(element)">
+                <mat-icon>delete_forever</mat-icon>
+                <span matTooltip="delete {{element.name}}">Delete</span>
+              </button>
+            </mat-menu>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="flavourDisplayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: flavourDisplayedColumns;"></mat-row>
+
+        <tr class="mat-row no-data-row" *matNoDataRow>
+          <h2 class="mat-cell no-data-text">No data found</h2>
+        </tr>
+      </mat-table>
+
+      <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
+    </div>
+
+    <!-- Sizes -->
+    <div class="mat-elevation-z8 table-container">
+
+      <div class="table-top-controllers">
+        <div class="table-name"> {{product.name}} Sizes</div>
+        <div>
+          <button mat-button class="top-table-menu" (click)="onAddProductFlavour()">Add New {{product.name}}
+            Size</button>
+        </div>
+      </div>
+
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="sizeApplyFilter($event)" placeholder="Ex. ium">
+      </mat-form-field>
+
+      <mat-table [dataSource]="sizeDataSource" matSort class="table" #mytable>
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Price </mat-header-cell>
+          <mat-cell *matCellDef="let element"> R {{element.price}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="list menu" matTooltip="Show actions">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="onUpdateProductFlavour(element)">
+                <mat-icon>create</mat-icon>
+                <span matTooltip="update">Update</span>
+              </button>
+
+              <button mat-menu-item (click)="onDeleteProductFlavour(element)">
+                <mat-icon>delete_forever</mat-icon>
+                <span matTooltip="delete {{element.name}}">Delete</span>
+              </button>
+            </mat-menu>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="sizeDisplayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: sizeDisplayedColumns;"></mat-row>
+
+        <tr class="mat-row no-data-row" *matNoDataRow>
+          <h2 class="mat-cell no-data-text">No data found</h2>
+        </tr>
+      </mat-table>
+
+      <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+
+
+</div>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

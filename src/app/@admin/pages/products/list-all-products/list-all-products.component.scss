@@ -1,0 +1,16 @@
+@import "/src/app/@theme/generic/tables.scss";
+
+.mat-cell {
+  justify-content: center;
+  text-align: center !important;
+
+  div {
+    word-wrap: break-word !important;
+    width: 163px;
+  }
+}
+
+.mat-header-cell {
+  justify-content: center;
+  text-align: center !important;
+}
